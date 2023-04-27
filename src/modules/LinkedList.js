@@ -38,19 +38,26 @@ export default class LinkedList {
 		return this.head;
 	}
 
-	At(index) {
+	Tail() {
 		if (!this.head) {
 			return null;
 		}
-		let node = this.head;
+		let tail = this.head;
+		while (tail.next != null) {
+			tail = tail.next;
+		}
+		return tail;
+	}
+
+	At(index) {
+		let current = this.head;
 		for (let i = 0; i < index; i++) {
-			node = node.next;
+			current = current.next;
+			if (!current) {
+				return "There is no data at index " + index + ".";
+			}
 		}
-		if (node) {
-			return node;
-		} else {
-			return null;
-		}
+		return current;
 	}
 
 	Pop() {
