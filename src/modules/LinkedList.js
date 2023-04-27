@@ -5,14 +5,14 @@ export default class LinkedList {
 	}
 
 	Append(value) {
-		//Check if empty
-		if (!this.head) {
-			this.head = new Node(value);
-			return this;
+		if (this.head == null) this.Prepend(value);
+		else {
+			let current = this.head;
+			while (current.next != null) {
+				current = current.next;
+			}
+			current.next = new Node(value);
 		}
-		let tail = this.findTail();
-		tail.next = new Node(value);
-		return tail;
 	}
 
 	Prepend(value) {
@@ -71,20 +71,40 @@ export default class LinkedList {
 		previous.next = null;
 	}
 
-	Contains(value) {}
-
-	Find(value) {}
-
-	toString() {}
-
-	findTail() {
-		if (!this.head) {
-			return null;
+	Contains(value) {
+		if (!value) {
+			return;
 		}
-		let tail = this.head;
-		while (tail.next != null) {
-			tail = tail.next;
+		let current = this.head;
+		while (current) {
+			if (current.value === value) {
+				return true;
+			}
+			current = current.next;
 		}
-		return tail;
+		return false;
+	}
+
+	Find(value) {
+		let current = this.head;
+		let index = 0;
+		while (current) {
+			if (current.value === value) {
+				return index;
+			}
+			current = current.next;
+			index++;
+		}
+	}
+
+	ToString() {
+		let current = this.head;
+		let string = "";
+
+		while (current) {
+			string += `(${current.value}) -> `;
+			current = current.next;
+		}
+		return (string += "null");
 	}
 }
