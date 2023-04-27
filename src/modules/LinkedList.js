@@ -70,12 +70,15 @@ export default class LinkedList {
 		}
 		let current = this.head;
 		let previous = null;
+		let counter = 0;
 
 		while (current.next) {
 			previous = current;
 			current = current.next;
+			counter++;
 		}
 		previous.next = null;
+		console.log(`Removed value ${current.value} at index ${counter} from linked list.`);
 	}
 
 	Contains(value) {
